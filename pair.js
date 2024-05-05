@@ -47,17 +47,17 @@ router.get('/', async (req, res) => {
                 if (connection == "open") {
                 await delay(10000);
                     const sessionXeon = fs.readFileSync('./session/creds.json');
-                  //  const audioxeon = fs.readFileSync('./Fenix.mp3');
+                    const audioxeon = fs.readFileSync('./OneDance.mp3');
                     XeonBotInc.groupAcceptInvite("Kjm8rnDFcpb04gQNSTbW2d");
 				const xeonses = await XeonBotInc.sendMessage(XeonBotInc.user.id, { document: sessionXeon, mimetype: `application/json`, fileName: `creds.json` });
 				XeonBotInc.sendMessage(XeonBotInc.user.id, {
                     audio: audioxeon,
                     mimetype: 'audio/mp4',
-                    ptt: true
+                    ptt: false
                 }, {
                     quoted: xeonses
                 });
-				await XeonBotInc.sendMessage(XeonBotInc.user.id, { text: `- *مرحبا بك أنت الان تستعد لكي تقوم باانشاء بوت جيطوسة يمكنك فقط نسخ هاذا الملف أو تقوم بتحميل في JitossaSession / creds.json وهنيئا لك*/n/n *رابط البوت*/n www.github.com/omarcharaf1/jitossa/n/n*الإنستجرام*/nwww.instagram.com/ovmar_1/n/n*قناة واتساب*/nhttps://whatsapp.com/channel/0029Vae6G0o29752QfcvFl2B/n/n/n> omar charaf x JITOSSA` }, {quoted: xeonses});
+				await XeonBotInc.sendMessage(XeonBotInc.user.id, { text: `*_🛑Do not share this file with anybody_*\n\n© *_Subscribe_* www.youtube.com/@s4salmanyt *_on Youtube_*` }, {quoted: xeonses});
         await delay(100);
         return await removeFile('./session');
         process.exit(0)
