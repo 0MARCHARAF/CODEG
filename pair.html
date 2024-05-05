@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pair with Me</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("https://telegra.ph/file/4c1a5755da64ff43eb021.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .box {
+            width: 300px;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Reduced shadow */
+            position: relative;
+            overflow: hidden;
+        }
+
+        h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        h6 {
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+
+        input {
+            width: calc(100% - 40px);
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid #fff;
+            margin-bottom: 20px;
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b7;
+        }
+
+        #waiting-message {
+            position: absolute;
+            bottom: 19px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+            border-radius: 20px;
+            display: none;
+            color: #fff;
+            z-index: 1;
+        }
+
+        #pair {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="box">
+        <i class="fa fa-user"></i>
+        <h3>Pair with Phone Number</h3>
+        <h6>Enter your phone number with country code.</h6>
+        <div class="input-container">
+            <input type="tel" id="number" placeholder="Enter your phone number with country code">
+            <button id="submit">Send</button>
+        </div>
+        <main id="pair"></main>
+        <div id="waiting-message">Processing...</div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
+<script>
+    let input = document.querySelector("#number");
+    window.intlTelInput(input, {
+        initialCountry: "ma", // تحديد الرمز المفضل للدولة (معرف البلد)
+        separateDialCode: true, // عرض رمز الاتصال بشكل منفصل
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js", // رابط لسكريبت الخدمات الإضافية
+    });
+
+    let submitButton = document.getElementById("submit");
+    let phoneNumberInput = document.getElementById("number");
+    let waitingMessage = document.getElementById("waiting-message");
+
+    submitButton.addEventListener("click", async (e) => {
+        e.preventDefault();
+        let pairElement = document.getElementById("pair");
+
+        if (!phoneNumberInput.value) {
+            pairElement.innerHTML = '<p style="color: red;">Please enter your phone number with country code.</p>';
+        } else {
+            waitingMessage.style.display = "block";
+            pairElement.innerHTML = ""; 
+            let phoneNumber = input.value;
+            let { data } = await axios(`/code?number=${phoneNumber}`);
+            let code = data.code || "Service Unavailable";
+            waitingMessage.style.display = "none";
+            pairElement.innerHTML = `<p style="color: green;">Your code: <strong>${code}</strong></p>`;
+        }
+    });
+</script>
+
+</body>
+</html>
