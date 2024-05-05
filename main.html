@@ -1,124 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Button Design</title>
-  <style>
-    /* هنا نفس الأسلوب السابق للأزرار والخلفيات */
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      background-image: url("https://telegra.ph/file/4c1a5755da64ff43eb021.jpg");
-      background-repeat: no-repeat;
-      background-size: cover;
-      font-family: 'Roboto', 'Segoe UI', sans-serif;
-      position: relative;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JITOSSA AND BOBIZA</title>
+    <link rel="icon" href="https://telegra.ph/file/4c1a5755da64ff43eb021.jpg" type="image/x-icon">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: radial-gradient(circle, rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url("https://i.ibb.co/RcH6M0w/Intro-Image.jpg");
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+        
+        .btn-container {
+            width: 100%;
+            max-width: 300px;
+            padding: 40px; /* تم تقليل التباعد */
+            text-align: center;
+        }
 
-    .btn-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 30px;
-      justify-items: center;
-      grid-row-gap: 20px;
-    }
+        .btn {
+            padding: 15px 40px;
+            background-color: rgba(255, 275, 255, 0.7); /* شفافية لون الخلفية */
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 18px;
+            text-transform: uppercase;
+            color: #000;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 100%;
+            max-width: 200px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        }
 
-    .btn {
-      padding: 12px 20px;
-      border: 2px solid transparent;
-      border-radius: 10px;
-      background-color: rgba(255, 255, 255, 0.3);
-      color: #000;
-      font-size: 18px;
-      font-weight: bold;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
-      outline: none;
-      position: relative;
-      overflow: hidden;
-      width: 100%;
-      z-index: 2;
-    }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.0);
+        }
 
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: -10px;
-      left: -10px;
-      right: -10px;
-      bottom: -10px;
-      border: 2px solid rgba(255, 255, 255, 0.5);
-      border-radius: 15px;
-      z-index: -1;
-      transition: border-color 0.3s ease;
-    }
+        img {
+            width: 100px; /* تم تقليل حجم الصورة */
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
 
-    .btn:hover {
-      background-color: rgba(255, 255, 255, 0.5);
-      color: #000;
-    }
-
-    .btn:hover::before {
-      border-color: rgba(255, 255, 255, 0.8);
-    }
-
-    .btn:focus {
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
-    }
-
-    .btn:active {
-      transform: translateY(2px) scale(0.98);
-    }
-
-    /* تطبيق الضبابية والتعتيم على الصورة */
-    body::after {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("https://telegra.ph/file/4c1a5755da64ff43eb021.jpg");
-      background-size: cover;
-      background-position: center;
-      filter: blur(8px) brightness(80%) contrast(110%); /* زيادة الضبابية والتعتيم */
-      z-index: -2;
-    }
-
-    /* زيادة حدة الألوان */
-    body::before {
-      content: '';
-      position: fixed;
-      bottom: 10px; /* تحديد المسافة من الأسفل */
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      text-align: center;
-      color: #000; /* لون النص */
-      font-size: 14px; /* حجم الخط */
-      z-index: 3; /* ضع النص فوق الصورة */
-      transform: skew(-10deg); /* إضافة الميل */
-    }
-  </style>
+        .copyright {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #ccc;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
-
-  <div class="btn-container">
-    <button onclick="window.open('/pair')" class="btn">Pair Code</button>
-    <button onclick="window.open('https://github.com/omarcharaf1/jitossa/fork')" class="btn">Fork bot</button>
-    <button onclick="window.open('https://t.me/Jinkx7')" class="btn">Telegram</button>
-    <button onclick="window.open('https://www.instagram.com/ovmar_1')" class="btn">Instagram</button>
-  </div>
-
-  <!-- النص أسفل الصفحة -->
-  <div style="position: fixed; bottom: 10px; left: 30%; transform: translateX(-50%); color: #000; font-size: 14px; transform: skew(-10deg);">
-    ©OMARCHARAF1 / JITOSSA
-  </div>
-
+    <div class="btn-container">
+        <img src="https://i.ibb.co/RcH6M0w/Intro-Image.jpg" alt="Intro Image">
+        <button onclick="window.open('/pair')" class="btn">Pair Code</button>
+        <button onclick="window.open('https://github.com/Omarcharaf1/JITOSSA/fork')" class="btn">Fork</button>
+        <button onclick="window.open('https://github.com/Omarcharaf1/JITOSSA')" class="btn">GitHub</button>
+        <button onclick="window.open('https://wa.me/message/R6FDLB56FVYGN1')" class="btn">Whatsapp</button>
+    </div>
+    <div class="copyright">&#169; JITOSSA AND BOBIZA</div>
 </body>
 </html>
