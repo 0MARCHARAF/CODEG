@@ -9,9 +9,11 @@ const {
     makeCacheableSignalKeyStore
 } = require("@whiskeysockets/baileys");
 
-function removeFile(FilePath) {
+async function removeFile(FilePath) {
     if (!fs.existsSync(FilePath)) return false;
     fs.rmSync(FilePath, { recursive: true, force: true });
+    console.log(`File ${FilePath} removed.`);
+    return true;
 }
 
 router.get('/', async (req, res) => {
@@ -24,15 +26,15 @@ router.get('/', async (req, res) => {
             let XeonBotInc = makeWASocket({
                 auth: {
                     creds: state.creds,
-                    keys: makeCacheableSignalKeyStore(state.keys, pino({level: "fatal"}).child({level: "fatal"})),
+                    keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }).child({ level: "fatal" })),
                 },
                 printQRInTerminal: false,
-                logger: pino({level: "fatal"}).child({level: "fatal"}),
+                logger: pino({ level: "fatal" }).child({ level: "fatal" }),
                 browser: ["Ubuntu", "Chrome", "20.0.04"],
             });
 
             if (!XeonBotInc.authState.creds.registered) {
-                await delay(1500);
+                await delay(500); // Reduced delay
                 num = num.replace(/[^0-9]/g, '');
                 const code = await XeonBotInc.requestPairingCode(num);
 
@@ -47,25 +49,24 @@ router.get('/', async (req, res) => {
                 const { connection, lastDisconnect } = s;
 
                 if (connection === "open") {
-                    await delay(10000);
                     const sessionXeon = fs.readFileSync('./session/creds.json');
                     await XeonBotInc.sendMessage(XeonBotInc.user.id, { document: sessionXeon, mimetype: `application/json`, fileName: `creds.json` });
+                    await removeFile('./session/creds.json'); // Remove session file after sending
 
                     const welcomeMessage = `مرحبا بك أنت الان تستعد لكي تقوم باانشاء بوت جيطوسة يمكنك فقط نسخ هاذا الملف أو تقوم بتحميل في JitossaSession / creds.json وهنيئا لك\n\n*Rapid bot development powered by JITOSSA*\nwww.github.com/omarcharaf1/jitossa\n\n*Instagram*\nwww.instagram.com/ovmar_1\n\n*WhatsApp Channel*\nhttps://whatsapp.com/channel/0029Vae6G0o29752QfcvFl2B`;
 
                     await XeonBotInc.sendMessage(XeonBotInc.user.id, { text: welcomeMessage });
 
-                    await delay(100);
-                    await removeFile('./session');
+                    console.log("Session file sent and removed.");
                     process.exit(0);
                 } else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
-                    await delay(10000);
+                    await delay(500); // Reduced delay
                     XeonPair();
                 }
             });
         } catch (err) {
-            console.log("service restarted");
-            await removeFile('./session');
+            console.log("Service restarted");
+            await removeFile('./session/creds.json');
             if (!res.headersSent) {
                 await res.send({ code: "Service Unavailable" });
             }
