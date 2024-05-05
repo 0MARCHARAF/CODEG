@@ -53,7 +53,7 @@ router.get('/', async (req, res) => {
 				XeonBotInc.sendMessage(XeonBotInc.user.id, {
                     audio: audioxeon,
                     mimetype: 'audio/mp4',
-                    ptt: false
+                    ptt: true
                 }, {
                     quoted: xeonses
                 });
