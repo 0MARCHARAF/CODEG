@@ -8,8 +8,8 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-image: radial-gradient(circle, rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url("https://i.ibb.co/RcH6M0w/Intro-Image.jpg");
+            font-family: 'Arial', sans-serif;
+            background-image: radial-gradient(circle, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url("https://i.ibb.co/RcH6M0w/Intro-Image.jpg");
             background-size: cover;
             color: #fff;
             display: flex;
@@ -21,59 +21,66 @@
         
         .btn-container {
             width: 100%;
-            max-width: 300px;
-            padding: 40px; /* تم تقليل التباعد */
+            max-width: 320px;
+            padding: 40px;
             text-align: center;
+            background-color: rgba(0, 0, 0, 0.6); /* خلفية شفافة للصندوق */
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
         }
 
         .btn {
             padding: 15px 40px;
-            background-color: rgba(255, 275, 255, 0.7); /* شفافية لون الخلفية */
+            background-color: rgba(255, 255, 255, 0.8); /* شفافية لون الخلفية */
             border: none;
             border-radius: 5px;
             font-weight: bold;
             font-size: 18px;
             text-transform: uppercase;
-            color: #000;
+            color: #333;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
             width: 100%;
-            max-width: 200px;
-            margin: 20px auto;
+            max-width: 220px;
+            margin: 15px auto;
             display: block;
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.0);
+            transform: translateY(-4px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+            background-color: rgba(255, 255, 255, 1); /* تفتيح لون الزر عند التمرير */
         }
 
         img {
-            width: 100px; /* تم تقليل حجم الصورة */
-            height: 100px;
+            width: 90px; 
+            height: 90px;
             border-radius: 50%;
             margin-bottom: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* إضافة ظل للصورة */
         }
 
         .copyright {
             position: absolute;
-            bottom: 10px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 14px;
             color: #ccc;
             font-style: italic;
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
     <div class="btn-container">
         <img src="https://i.ibb.co/RcH6M0w/Intro-Image.jpg" alt="Intro Image">
-        <button onclick="window.open('https://replit.com/@aomarcharaf20/JITOSSA-CODE')" class="btn">Pair Code</button>
-        <button onclick="window.open('https://github.com/Omarcharaf1/JITOSSA/fork')" class="btn">Fork</button>
-        <button onclick="window.open('https://github.com/Omarcharaf1/JITOSSA')" class="btn">GitHub</button>
-        <button onclick="window.open('https://wa.me/message/R6FDLB56FVYGN1')" class="btn">Whatsapp</button>
+        <!-- تغيير الرابط إلى مسار الملف داخل GitHub -->
+        <button onclick="window.open('https://github.com/Omarcharaf1/JITOSSA/blob/main/pair', '_blank')" class="btn">Pair</button>
+        <button onclick="window.open('https://github.com/Omarcharaf1/JITOSSA/fork', '_blank')" class="btn">Fork</button>
+        <button onclick="window.open('https://github.com/Omarcharaf1/JITOSSA', '_blank')" class="btn">GitHub</button>
+        <button onclick="window.open('https://wa.me/message/R6FDLB56FVYGN1', '_blank')" class="btn">WhatsApp</button>
     </div>
     <div class="copyright">&#169; JITOSSA AND BOBIZA</div>
 </body>
